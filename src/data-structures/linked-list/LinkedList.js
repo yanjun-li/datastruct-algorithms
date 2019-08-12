@@ -1,11 +1,11 @@
 import LinkedListNode from './LinkedListNode'
-import { euqal } from '../../util'
+import { equal } from '../../util'
 class LinkedList {
     /**
      * 
      * @param {Function} compareFn 
      */
-    constructor(compareFn = euqal) {
+    constructor(compareFn = equal) {
         this.head = null;
         this.tail = null;
         this.compare = compareFn
