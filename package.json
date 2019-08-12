@@ -1,0 +1,19 @@
+{
+  "name": "js-algorithms",
+  "version": "1.0.0",
+  "description": "use js to learn data structures and algorithms",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "author": "liyanjun <liyanjun@do-global.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "~7.5.5",
+    "@babel/preset-env": "~7.5.5",
+    "babel-jest": "~24.8.0",
+    "jest": "~24.8.0",
+    "typescript": "~3.5.3"
+  }
+}
