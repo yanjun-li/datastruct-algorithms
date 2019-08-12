@@ -84,6 +84,38 @@ class LinkedList {
 
         return deleteNode
     }
+    deleteHead() {
+        let deleteNode = this.head
+        if (this.head) {
+            this.head = this.head.next
+            if (!this.head) {
+                this.tail = null
+            }
+        }
+        return deleteNode
+    }
+
+    deleteTail() {
+        let deleteNode = this.tail
+
+        if (!this.head.next) {
+            this.head = null
+            this.tail = null
+            return deleteNode
+        }
+
+        let currentNode = this.head
+        while (currentNode.next) {
+            if (!currentNode.next.next) {
+                currentNode.next = null
+            } else {
+                currentNode = currentNode.next
+            }
+        }
+        this.tail = currentNode
+
+        return deleteNode
+    }
     travel(callback) {
         let currentNode = this.head
         while (currentNode) {
