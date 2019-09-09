@@ -1,14 +1,14 @@
 import LinkedListNode from './LinkedListNode'
-import { equal } from '../../util'
+import Comparator from '../../util/Comparator'
 class LinkedList {
     /**
      * 
      * @param {Function} compareFn 
      */
-    constructor(compareFn = equal) {
+    constructor(compareFn) {
         this.head = null;
         this.tail = null;
-        this.compare = compareFn
+        this.compare = new Comparator(compareFn)
     }
     /**
      * 
@@ -40,20 +40,34 @@ class LinkedList {
         return this;
     }
 
-    find(value) {
+    /**
+     * @param {Object} findParams
+     * @param {*} findParams.value
+     * @param {function} [findParams.callback]
+     * @return {LinkedListNode}
+     */
+    find({ value = undefined, callback = undefined }) {
         if (!this.head) {
-            return null
+            return null;
         }
 
-        let currentNode = this.head
+        let currentNode = this.head;
+
         while (currentNode) {
-            if (this.compare(currentNode.value, value)) {
-                return currentNode
+            // If callback is specified then try to find node by callback.
+            if (callback && callback(currentNode.value)) {
+                return currentNode;
             }
-            currentNode = currentNode.next
+
+            // If value is specified then try to compare by value..
+            if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+                return currentNode;
+            }
+
+            currentNode = currentNode.next;
         }
 
-        return null
+        return null;
     }
     delete(value) {
         let deleteNode = null
@@ -64,21 +78,32 @@ class LinkedList {
 
         // head 会被替换不能使用if
         // if (this.head && this.compare(this.head.value, value)) {
-        while (this.head && this.compare(this.head.value, value)) {
+        while (this.head && this.compare.equal(this.head.value, value)) {
             deleteNode = this.head
             this.head = this.head.next
         }
 
         let currentNode = this.head;
+        // if (currentNode !== null) {
+        //     while (currentNode.next) {
+        //         if (this.compare(currentNode.next.value, value)) {
+        //             deleteNode = currentNode.next
+        //             currentNode.next = deleteNode.next
+        //         } else {
+        //             currentNode = currentNode.next
+        //         }
+        //     }
+        // }
+
         while (currentNode && currentNode.next) {
-            if (this.compare(currentNode.next.value, value)) {
+            if (this.compare.equal(currentNode.next.value, value)) {
                 deleteNode = currentNode.next
                 currentNode.next = deleteNode.next
             } else {
                 currentNode = currentNode.next
             }
         }
-        if (this.compare(this.tail.value, value)) {
+        if (this.compare.equal(this.tail.value, value)) {
             this.tail = currentNode
         }
 
@@ -123,27 +148,28 @@ class LinkedList {
             currentNode = currentNode.next
         }
     }
+    /**
+     * @returns {LinkedListNode[]}
+     */
     toNodeArray() {
         let arr = []
-        const cb = (node) => {
-            arr.push(node)
+        let curr = this.head
+        while(curr){
+            arr.push(curr)
+            curr = curr.next
         }
-        this.travel(cb)
         return arr
     }
+    /**
+     * @returns {string[]}
+     */
     toArray() {
-        // let array = []
-        // let currentNode = this.head
-        // if (currentNode) {
-        //     array.push(currentNode.value)
-        //     currentNode = currentNode.next
-        // }
-        // return array
         let arr = []
-        const cb = (node) => {
-            arr.push(node.value)
+        let curr = this.head
+        while(curr){
+            arr.push(curr.value)
+            curr = curr.next
         }
-        this.travel(cb)
         return arr
     }
     /**
