@@ -15,3 +15,9 @@ export function twoDimensionalArray(x, y){
     let arr = Array.from(Array(x), i=> Array(y))
     return arr
 }
+
+export function swap(array, i, j) {
+    const temp = array[i]
+    array[i] = array[j];
+    array[j] = temp;
+}
