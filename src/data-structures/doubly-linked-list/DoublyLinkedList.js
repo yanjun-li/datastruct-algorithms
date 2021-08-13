@@ -1,11 +1,11 @@
 import DoublyLinkedListNode from './DoublyLinkedListNode'
-import { equal } from '../../util'
+import Comparator from '../../util/Comparator'
 export default class DoublyLinkedList {
     /**
      * @param {Function} compareFn 
      */
-    constructor(compareFn = equal) {
-        this.compareFn = compareFn
+    constructor(compareFn) {
+        this.compare = new Comparator(compareFn)
         /**@type {DoublyLinkedListNode} */
         this.head = null;
         /**@var DoublyLinkedListNode */
@@ -59,7 +59,7 @@ export default class DoublyLinkedList {
         let deleteNode = null;
         let currentNode = this.head
         while (currentNode) {
-            if (this.compareFn(value, currentNode.value)) {
+            if (this.compare.equal(value, currentNode.value)) {
                 deleteNode = currentNode
                 if (currentNode === this.head) {
                     this.head = currentNode.next
@@ -100,7 +100,7 @@ export default class DoublyLinkedList {
             if (callback && callback(currentNode.value)) {
                 return currentNode
             }
-            if (value !== undefined && this.compareFn(value, currentNode.value)) {
+            if (value !== undefined && this.compare.equal(value, currentNode.value)) {
                 return currentNode
             }
             currentNode = currentNode.next
