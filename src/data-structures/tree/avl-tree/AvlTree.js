@@ -1,4 +1,4 @@
-import BinarySearchTree from '../BinarySearchTree/BinarySearchTree'
+import BinarySearchTree from '../binary-search-tree/BinarySearchTree'
 
 export default class AvlTree extends BinarySearchTree {
     insert(value) {

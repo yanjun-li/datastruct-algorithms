@@ -1,4 +1,4 @@
-import BinarySearchTree from '../BinarySearchTree/BinarySearchTree';
+import BinarySearchTree from '../BinarySearchTree';
 
 describe('BinarySearchTree', () => {
   it('should create binary search tree', () => {
