@@ -77,7 +77,7 @@ export default class AvlTree extends BinarySearchTree {
         rootNode.setRight(null)
 
         const rightLeftNode = rightNode.left
-        rightLeftNode.setLeft(null)
+        rightNode.setLeft(null)
 
         if(rightLeftNode.right) {
             rightNode.setLeft(rightLeftNode.right)
@@ -97,7 +97,7 @@ export default class AvlTree extends BinarySearchTree {
 
         if(rootNode.parent) {
             rootNode.parent.setRight(rightNode)
-        } else if(rightNode === this.root) {
+        } else if(rootNode === this.root) {
             this.root = rightNode
         }
 
