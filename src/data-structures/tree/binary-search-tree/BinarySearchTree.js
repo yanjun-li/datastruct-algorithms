@@ -35,19 +35,13 @@ export default class BinarySearchTree {
     }
     find(value) {
         let currentNode = this.root
-        if (this.compare.equal(value, currentNode.value)) {
-            return currentNode
-        }
-        while (currentNode.left && this.compare.lessThan(value, currentNode.value)) {
-            currentNode = currentNode.left
-            if(currentNode.value === value) {
+        while(currentNode) {
+            if (this.compare.equal(value, currentNode.value)) {
                 return currentNode
-            }
-        }
-        while (currentNode.right && this.compare.greaterThan(value, currentNode.value)) {
-            currentNode = currentNode.right
-            if(currentNode.value === value) {
-                return currentNode
+            } else if(this.compare.lessThan(value, currentNode.value)) {
+                currentNode = currentNode.left
+            } else if(this.compare.greaterThan(value, currentNode.value)) {
+                currentNode = currentNode.right
             }
         }
         return null
@@ -89,11 +83,11 @@ export default class BinarySearchTree {
         return !!this.find(value)
     }
     findMinInRight() {
-        let currentNode = this.root
-        let right = this.root.right
-        let min = right
-        while(right.left) {
-            min = right.left
+        let currentNode = this.root.right
+        let min = currentNode
+        while(currentNode.left) {
+            min = currentNode.left
+            currentNode = currentNode.left
         }
         return min
     }

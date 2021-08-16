@@ -23,6 +23,30 @@ describe('BinarySearchTree', () => {
     // expect(insertedNode2.value).toBe(20);
   });
 
+  it('check find value', ()=> {
+    const bst = new BinarySearchTree()
+    bst.insert(30);
+    bst.insert(40);
+    bst.insert(35);
+    bst.insert(50);
+
+    bst.insert(15);
+    bst.insert(11);
+    bst.insert(19);
+
+    const f1 =  bst.find(11)
+    const f2 =  bst.find(19)
+    const f3 =  bst.find(50)
+    const f4 =  bst.find(35)
+    const f5 =  bst.find(100)
+
+    expect(f1.value).toBe(11)
+    expect(f2.value).toBe(19)
+    expect(f3.value).toBe(50)
+    expect(f4.value).toBe(35)
+    expect(f5).toBeNull()
+  })
+
   it('should check if value exists', () => {
     const bst = new BinarySearchTree();
 
