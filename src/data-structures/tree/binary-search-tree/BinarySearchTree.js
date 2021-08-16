@@ -60,7 +60,7 @@ export default class BinarySearchTree {
                 nodeToRemove.setValue(null)
             }
         } else if(nodeToRemove.left && nodeToRemove.right) {
-            const minInRight = this.findMinInRight()
+            const minInRight = this.findMinInRight(nodeToRemove)
             if(!this.compare.equal(minInRight, nodeToRemove.right)){
                 this.remove(minInRight.value)
                 nodeToRemove.setValue(minInRight.value)
@@ -82,8 +82,8 @@ export default class BinarySearchTree {
     contains(value) {
         return !!this.find(value)
     }
-    findMinInRight() {
-        let currentNode = this.root.right
+    findMinInRight(nodeToRemove) {
+        let currentNode = nodeToRemove
         let min = currentNode
         while(currentNode.left) {
             min = currentNode.left
