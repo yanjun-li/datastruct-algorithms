@@ -32,6 +32,11 @@ describe('BinaryTreeNode', () => {
         expect(rootNode.parent).toBeNull()
         expect(leftNode.parent).toBe(rootNode)
         expect(rightNode.parent).toBe(rootNode)
+
+        rootNode.setLeft(null).setRight(null)
+        expect(leftNode.parent).toBeNull()
+        expect(rightNode.parent).toBeNull()
+
     })
 
     it('should traverse node', () => {

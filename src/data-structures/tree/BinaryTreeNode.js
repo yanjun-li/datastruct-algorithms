@@ -50,6 +50,9 @@ export default class BinaryTreeNode {
         return this
     }
     setLeft(node) {
+        if(this.left) {
+            this.left.parent = null
+        }
         this.left = node
         if (this.left) {
             this.left.parent = this
@@ -57,6 +60,9 @@ export default class BinaryTreeNode {
         return this
     }
     setRight(node) {
+        if(this.right) {
+            this.right.parent = null
+        }
         this.right = node
         if (this.right) {
             this.right.parent = this
